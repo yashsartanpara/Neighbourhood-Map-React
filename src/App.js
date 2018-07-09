@@ -16,10 +16,10 @@ class App extends React.Component {
         center: {lat: 40.730610, lng: -73.935242}
     };
 
-// Check if maps api loads
+    // Check if maps api loads
     componentWillReceiveProps({isScriptLoadSucceed}) {
         if (isScriptLoadSucceed) {
-            let marker = [];
+
             // initiating the map
             let mapContainer = document.getElementById('map'),
                 map = new window.google.maps.Map(mapContainer, {
@@ -27,17 +27,19 @@ class App extends React.Component {
                     center: {lat: 40.730610, lng: -73.935242}
                 });
 
-            // Initialize markers
+            // Initialize info windows
             let infowindow = new window.google.maps.InfoWindow({});
 
             this.setState({map: map, infoWindows: infowindow});
+
+            // Fetch locations around new york city
             fetch('https://api.foursquare.com/v2/venues/search?ll=' + this.state.center.lat + ',' + this.state.center.lng +
                 '&client_id=Y4ZQOW5RNKPBP4TWULUZRL2YCCY33VJUF5UADROSTWKRPVGE&' +
                 'client_secret=XL2YMRNJDBDO3QOMILLDOTIPWKYAVRCHPNCLIU0LCD1MKVLE&v=20180707')
                 .then(
                     res => {
                         if (res.status !== 200) {
-                            alert("Places API failed")
+                            alert("Places API failed");
                             throw res;
                         }
                         return res.json()
@@ -55,11 +57,12 @@ class App extends React.Component {
         }
     }
 
-
+    // Function to add markers to the map
     setMarker = (map) => {
         let self = this;
         let locs = this.state.locations;
 
+        // Traverse through each locations and add marker
         locs.forEach(loc => {
             let marker = new window.google.maps.Marker({
                 position: {lat: loc.location.lat, lng: loc.location.lng},
@@ -67,6 +70,7 @@ class App extends React.Component {
                 title: loc.name
             });
 
+            // Add event listener to markers to open info window
             marker.addListener('click', function () {
                 self.showInfoWindow(marker, loc);
             });
@@ -78,11 +82,17 @@ class App extends React.Component {
 
     // Show info window when marker is clicked
     showInfoWindow = (marker, loc) => {
+        document.getElementById('searchContainer').style.zIndex = 1;
+        document.getElementById('map').style.zIndex = 2;
+        document.getElementById('searchButton').style.zIndex = 3;
+        // Close any opened info windows
         this.state.infoWindows.close();
         let markers = this.state.infoWindows.marker,
             venueWins = [];
         if (markers !== marker) {
             markers = marker;
+
+            // Set bounce animation to markers
             marker.setAnimation(window.google.maps.Animation.BOUNCE);
             setTimeout(function () {
                 marker.setAnimation(null);
@@ -96,7 +106,10 @@ class App extends React.Component {
 
     };
 
+    // Function to populate info window
     showDetails = (loc) => {
+
+        // Get additional data about location from fetched data
         let currentCity, currentCountry, currentAddress, currentState;
         loc.location.address ? currentAddress = loc.location.address : currentAddress = '';
         loc.location.city ? currentCity = loc.location.city : currentCity = '';
@@ -117,9 +130,11 @@ class App extends React.Component {
     };
 
     componentDidMount() {
+        // Global function for Google map error handling
         window.gm_authFailure = this.gm_authFailure;
     }
 
+    // Global function for Google map error handling
     gm_authFailure() {
         window.alert("Google Maps failed to Load")
     }

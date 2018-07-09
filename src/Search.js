@@ -16,7 +16,7 @@ class Search extends React.Component {
         let markers = this.props.marker;
         this.state.venueWindows.forEach(function (e) {
             e.close()
-        })
+        });
         console.log(loc);
         markers.forEach(function (e) {
             if (e.title.toLowerCase().indexOf(loc.toLowerCase()) >= 0) {
