@@ -1,0 +1,85 @@
+/* Basic Structure*/
+#map {
+    float: right;
+    width: 80%;
+    height: 100vh;
+    background-color: grey;
+}
+
+#searchContainer {
+    width: 20%;
+}
+
+.search {
+    border: 1px solid gray;
+    width: 100%;
+    height: 30px;
+}
+
+/* Search button for mobile*/
+.searchButton {
+    display: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+.searchList {
+    height: 100vh;
+    overflow-y: auto !important;
+    margin-bottom: 30px;
+}
+
+/* List of search results*/
+li {
+    cursor: pointer;
+    background-color: whitesmoke;
+    color: black;
+    list-style: none;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+#venueDetails,
+#venueInfo {
+    text-align: center;
+    font-weight: bold;
+}
+
+li:hover {
+    background-color: white;
+
+}
+
+/* Mobile phones*/
+@media only screen and (max-width: 700px) {
+    /* Basic Structure*/
+    #searchContainer {
+        /*display: none;*/
+        width: 50%;
+        z-index: 1;
+    }
+
+    #map {
+        z-index: 2;
+        width: 100%;
+        position: absolute !important;
+    }
+
+    /* Search button for mobile devices*/
+    .searchButton {
+        top: 0;
+        background-color: white;
+        z-index: 3;
+        position: absolute;
+        display: block;
+    }
+
+}
