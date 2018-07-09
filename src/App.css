@@ -10,6 +10,17 @@
     width: 20%;
 }
 
+#err {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    position: absolute;
+    z-index: 500;
+    right: 40%;
+    display: none;
+}
+
 .search {
     border: 1px solid gray;
     width: 100%;
