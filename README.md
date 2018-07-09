@@ -21,3 +21,8 @@ How to run:
 * Run `npm install`
 * Run `npm start`
 * Visit `localhost:3000` to see live demo
+
+Service worker will not work with localhost so to run project in production mode:
+
+* Run `npm build` to build production build.
+* Run `npm run deploy` to deploy to specific address.
