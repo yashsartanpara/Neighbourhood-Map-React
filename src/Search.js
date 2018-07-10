@@ -14,22 +14,23 @@ class Search extends React.Component {
 
     // Filter list items according to user input
     findLoc = (loc) => {
+        let self = this;
         let markers = this.props.marker;
-        this.state.venueWindows.forEach(function (e) {
-            e.close()
-        });
-        console.log(loc);
+        let newMarkers = [];
+        this.props.infoWindows.close();
 
         // Hide/Show markers according to user inputs
         markers.forEach(function (e) {
             if (e.title.toLowerCase().indexOf(loc.toLowerCase()) >= 0) {
                 e.setVisible(true);
+                newMarkers.push(e);
             }
             else {
                 e.setVisible(false)
             }
 
-        })
+        });
+        self.setState({markers: newMarkers})
     };
 
     render() {
