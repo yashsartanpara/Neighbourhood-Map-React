@@ -5,6 +5,8 @@
 This project is created for Udacity Front end developer Nanodegree.
 This project allows user to search locations and show its details on a map.
 
+live demo - https://yashsartanpara.github.io/Neighbourhood-Map-React/
+
 Technology used : 
 * HTML
 * Css
