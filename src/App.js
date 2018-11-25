@@ -34,8 +34,8 @@ class App extends React.Component {
 
             // Fetch locations around new york city
             fetch('https://api.foursquare.com/v2/venues/search?ll=' + this.state.center.lat + ',' + this.state.center.lng +
-                '&client_id=Y4ZQOW5RNKPBP4TWULUZRL2YCCY33VJUF5UADROSTWKRPVGE&' +
-                'client_secret=LHQZFHYSYPHIN2QKXSEHTXVBOWYT3KJKX3XSOYMZRWSCGQNL&v=20180323')
+                '&client_id=MW3ZDC12I1XUFPSDQHLK0D453Y35QODWEIBSPAOIVGPYYU1I&' +
+                'client_secret=OB2PDLVKJE3VXYR0ANIODYBZ3V0AJRTMMC53PDNKADCDVZM4&v=20180323')
                 .then(
                     res => {
                         if (res.status !== 200) {
